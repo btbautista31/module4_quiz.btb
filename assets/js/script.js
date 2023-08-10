@@ -13,6 +13,7 @@ var gameScreen = document.getElementById("game")
 var scoreScreen = document.getElementById("scores")
 var correctCounter = 0
 var currentPlayer = document.getElementById("name-input")
+let allScores = JSON.parse(localStorage.getItem('allScores')) || [];
 
 
 //Function to generate the questions and associate to correct answers
@@ -36,16 +37,6 @@ var questions = [
 
 ]
 
-
-//Object for collating top 10 scores
-var highScores = [
-    {
-    playerName: [],
-    playerScore: [],
-    }
-
-]
-
 function startTimer() {
     interval = setInterval(() => {
         timerEl.textContent = timeLeft
@@ -57,7 +48,7 @@ function startTimer() {
     }, 1000);
 }
 
-
+//Function: Display questions
 function displayQuestions() {
     questionEl.innerText = ""
     answersEl.innerHTML = ""
@@ -74,10 +65,12 @@ function displayQuestions() {
             answersEl.append(answerBtn)
         }
     } else {
-        alert("Game Over")
+        // uncomment later
+        // alert("Game Over")
     }
 }
 
+//Function: Select answers
 function selectAnswer(event) {
     event.preventDefault();
     if (event.target && event.target.matches(".answer-btn")) {
@@ -92,7 +85,7 @@ function selectAnswer(event) {
             msgEl.innerText = "Incorrect"
             // remove 10 seconds from the timer
             timeLeft -= 10;
-            
+
         }
         questionIndex++;
         displayQuestions();
@@ -113,23 +106,39 @@ function startGame(event) {
 //Function: End Game, Enter name, Score Display
 function endGame() {
     if (questionIndex >= questions.length) {
-        console.log("Out of questions")
         gameScreen.style.display = "none"
         scoreScreen.style.display = "block"
         document.getElementById("player-score").textContent = correctCounter;
-        console.log(correctCounter)
-
     }
-
 }
 
-function submitScore (event) {
+function submitScore(event) {
     var playerName = document.getElementById("name-input").value
     var playerScore = correctCounter
-    console.log("Player Name:" + playerName);
-    console.log("Player Score: " + playerScore);
+
+    // console.log("Player Name:" + playerName);
+    // console.log("Player Score: " + playerScore);
+
+    let finalScore = {
+        name: playerName,
+        score: playerScore,
+    }
+
+    scoreScreen.style.display = "none";
+    allScores.push(finalScore);
+    console.log("Inside Final Score: ", finalScore)
+    saveScores();
+}
+    
+//Array of Objects for collating submitted scores
+function saveScores() {
+    localStorage.setItem("allScores", JSON.stringify(allScores));
 }
 
+
+console.log("All Scores: ", allScores)
+
+// getScores();
 
 //Event Listeners
 document.addEventListener("click", selectAnswer)
@@ -139,4 +148,4 @@ currentPlayer.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         submitScore();
     }
-});
+    });
