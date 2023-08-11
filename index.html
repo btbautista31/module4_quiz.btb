@@ -31,13 +31,21 @@
 
         <!-- Section for entering initials/info for score -->
         <section id="scores" style = "display: none">
-            <p>Your got <span id="player-score"></span> questions out of 10 correct </p>
+            <p>You got <span id="player-score"></span> questions out of 10 correct </p>
             <input type="text" id="name-input" class="input" placeholder="Enter your name">
             <button id="submitBtn" type="button" class="btn">Submit</button>
         </section>
 
         <!-- Section for high score display -->
-        <section id="high-scores" style = "display: none">
+        <section id="hiscores" style = "display: none">
+            <table id="hiscores-table">
+                <thead>
+                    <tr>
+                        <th>Player Initials</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+            </table>
         </section>
 
         <script src="assets/js/script.js"></script>

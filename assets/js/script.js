@@ -11,6 +11,7 @@ var interval
 var startScreen = document.getElementById("start")
 var gameScreen = document.getElementById("game")
 var scoreScreen = document.getElementById("scores")
+var topScoreScreen = document.getElementById("hiscores")
 var correctCounter = 0
 var currentPlayer = document.getElementById("name-input")
 let allScores = JSON.parse(localStorage.getItem('allScores')) || [];
@@ -26,15 +27,38 @@ var questions = [
         question: "question2",
         answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer2"
     },
-    {
-        question: "question3",
-        answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer3"
-    },
-    {
-        question: "question4",
-        answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer4"
-    }
-
+    // {
+    //     question: "question3",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer3"
+    // },
+    // {
+    //     question: "question4",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer4"
+    // },
+    // {
+    //     question: "question5",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer1"
+    // },
+    // {
+    //     question: "question6",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer2"
+    // },
+    // {
+    //     question: "question7",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer3"
+    // },
+    // {
+    //     question: "question8",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer4"
+    // },
+    // {
+    //     question: "question9",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer1"
+    // },
+    // {
+    //     question: "question10",
+    //     answers: ["answer1", "answer2", "answer3", "answer4"], answer: "answer2"
+    // }
 ]
 
 function startTimer() {
@@ -46,6 +70,7 @@ function startTimer() {
             timeLeft--;
         }
     }, 1000);
+
 }
 
 //Function: Display questions
@@ -129,16 +154,52 @@ function submitScore(event) {
     console.log("Inside Final Score: ", finalScore)
     saveScores();
 }
-    
-//Array of Objects for collating submitted scores
-function saveScores() {
-    localStorage.setItem("allScores", JSON.stringify(allScores));
-}
-
 
 console.log("All Scores: ", allScores)
+    
+//Function: Save scores to local storage
+function saveScores() {
+    localStorage.setItem("allScores", JSON.stringify(allScores));
+    showTopScores();
+}
 
-// getScores();
+//Function: Show top scores table
+
+function showTopScores() {
+    topScoreScreen.style.display = "block"
+    // creates a <table> element and a <tbody> element
+    const tbl = document.getElementById("hiscores-table");
+    const tblBody = document.createElement("tbody");
+    const tblHeader = document.createElement("thead");
+    
+
+    // creating all cells
+
+    for (let i = 0; i < 2; i++) {
+        // creates a table row
+        const row = document.createElement("tr");
+
+        for (let j = 0; j < 2; j++) {
+            // Create a <td> element and a text node, make the text
+            // node the contents of the <td>, and put the <td> at
+            // the end of the table row
+            const cell = document.createElement("td");
+            const cellText = document.createTextNode(`cell in row ${i}, column ${j}`);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+
+        // add the row to the end of the table body
+        tblBody.appendChild(row);
+    }
+
+    // put the <tbody> in the <table>
+    tbl.appendChild(tblBody);
+    // appends <table> into <body>
+    document.body.appendChild(tbl);
+    // sets the border attribute of tbl to '2'
+    tbl.setAttribute("border", "2");
+}
 
 //Event Listeners
 document.addEventListener("click", selectAnswer)
