@@ -1,0 +1,11 @@
+.answer-btn {
+
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    list-style: none;
+    border: 50%;
+}

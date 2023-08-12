@@ -8,11 +8,11 @@
     </head>
 
 
-    <body>
+    <body style = "text-align: center">
         <!-- Header section for the quiz intro including "Start Button" -->
         <header>
             <h1>Coding Quiz  Challenge</h1>
-            <div id="start" style = "display: block">
+            <div id="start" style = "display: block; text-align: center" >
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by 10 seconds!</p>
             <button id="beginBtn" type="button" class="btn">Begin Quiz</button>
             </div>
@@ -24,7 +24,7 @@
             <div class="questions">
             <div> Time Left <span id="timer"></span></div>
               <h2 id="question"></h2>  
-              <div id="answer-choices"></div>
+              <div id="answer-choices"> </div>
               <div id="message"></div>
             </div>
           </section>
@@ -37,7 +37,7 @@
         </section>
 
         <!-- Section for high score display -->
-        <section id="hiscores" style = "display: none">
+        <section id="hiscores" style = "display: none; text-align: center">
             <table id="hiscores-table">
                 <thead>
                     <tr>
@@ -46,6 +46,9 @@
                     </tr>
                 </thead>
             </table>
+            <br>
+            <button id="repeatBtn" type="button" class="btn" style="margin: 20px" >Repeat Game</button>
+            <br>
         </section>
 
         <script src="assets/js/script.js"></script>
